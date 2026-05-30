@@ -1,58 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Page</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Simple Page</title>
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-    body {
-      font-family: Arial, sans-serif;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      background: #f5f5f5;
-    }
+body {
+font-family: Arial, sans-serif;
+height: 100vh;
+display: flex;
+flex-direction: column;
+background: #f5f5f5;
+}
 
-    header {
-      height: 70px;
-      background: #222;
-      color: white;
-      display: flex;
-      align-items: center;
-      padding: 0 30px;
-      font-size: 24px;
-      font-weight: bold;
-    }
+header {
+height: 70px;
+background: #222;
+color: white;
+display: flex;
+align-items: center;
+padding: 0 30px;
+font-size: 24px;
+font-weight: bold;
+}
 
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+main {
+flex: 1;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 20px;
+}
 
-    h1 {
-      font-size: 48px;
-      color: #333;
-    }
-  </style>
+h1 {
+font-size: 48px;
+color: #333;
+}
+
+.cookie-display {
+background: white;
+padding: 20px 40px;
+border-radius: 8px;
+box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.cookie-item {
+margin: 10px 0;
+font-size: 18px;
+color: #555;
+}
+
+.cookie-item strong {
+color: #222;
+}
+</style>
+     <script type="text/javascript">
+            (function (d, g, t, i, e, s) {
+                var o = d["digiad"] = d["digiad"] || {};
+                d[e] = d[e] || function () { (o.q = o.q || []).push(arguments); };
+
+                var cdn_url = "https://cdn-publisher.digiad.ir/uDirEG/DigiAd-Publisher-For-Hanieh-WEBSITE-9736391";
+
+                s = g.createElement(t);
+                s.async = true;
+                s.src = cdn_url;
+                s.onload = function () {
+                    if (window.Publisher && window.Publisher.getInstance) {
+                        window.Publisher.getInstance().then(function(instance) {
+                            o.init = function() { return instance; };
+                            if (o.q) {
+                                o.q.forEach(function(args) { o.init.apply(o, args); });
+                                o.q = [];
+                            }
+                        });
+                    }
+                };
+                e = g.getElementsByTagName(t)[0];
+                e.parentNode.insertBefore(s, e);
+            })(window, document, "script", "digiad");
+        </script>
 </head>
 <body>
 
-  <header>
-    Hanieh Site
-  </header>
+<header>
+Hanieh Site
+</header>
 
-  <main>
-    <h1>Where is ads?</h1>
-  </main>
+<main>
+<h1>Where is ads?</h1>
+<div class="cookie-display" id="cookieDisplay">
+<div class="cookie-item"><strong>Dwid:</strong> <span id="dwid">Not found</span></div>
+<div class="cookie-item"><strong>Sentinel Dwid</strong> <span id="sentinel_dwid">Not found</span></div>
+</div>
+</main>
+
+<script>
+// Function to get a specific cookie by name
+function getCookie(name) {
+const value = `; ${document.cookie}`;
+const parts = value.split(`; ${name}=`);
+if (parts.length === 2) return parts.pop().split(';').shift();
+return null;
+}
+
+// Replace 'cookieName1' and 'cookieName2' with your actual cookie names
+const dwid = getCookie('_dwid');
+const sentinel_dwid = getCookie('_sentinel_dwid');
+
+
+// Display the values
+if (dwid) {
+document.getElementById('dwid').textContent = decodeURIComponent(dwid);
+}
+if (sentinel_dwid) {
+document.getElementById('sentinel_dwid').textContent = decodeURIComponent(sentinel_dwid);
+}
+
+
+// Optional: Display all cookies for debugging
+console.log('All cookies:', document.cookie);
+</script>
 
 </body>
 </html>
